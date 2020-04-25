@@ -1,21 +1,14 @@
 import React from "react";
 import "./App.css";
+import Quiz from "./Components/Quiz";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h1 class="ui block header">Music Quiz App</h1>
-      <div class="ui segment">
-        <h2 class="ui block header">Question</h2>
-        <div class="ui-grid">
-            <button class="ui teal button">Teal</button>
-            <button class="ui teal button">Teal</button>
-            <button class="ui teal button">Teal</button>
-            <button class="ui teal button">Teal</button>
-        </div>
-      </div>
+      <h1>Music Quiz App</h1>
+      <Quiz />
     </div>
   );
-}
+};
 
 export default App;
