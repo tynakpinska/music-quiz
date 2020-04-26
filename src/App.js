@@ -5,7 +5,7 @@ import Quiz from "./Components/Quiz";
 const App = () => {
   return (
     <div className="App">
-      <h1>Music Quiz App</h1>
+      <h1>Music Quiz</h1>
       <Quiz />
     </div>
   );

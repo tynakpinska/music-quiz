@@ -1,19 +1,27 @@
 import React, { Component } from "react";
-import Answers from "./Answers";
+import update from 'react-addons-update';
+import AnswersList from "./AnswersList";
 
 class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: {},
+      questions: [],
       currentQuestion: 0,
+      points: 0,
     };
   }
 
-  changeCurrentQuestion(prevState) {
+  handleAnswer(isCorrect) {
+    console.log(isCorrect)
     this.setState(prevState => {
-      return { currentQuestion: prevState.currentQuestion + 1 };
+      return {
+        questions: update(this.state.questions, {[prevState.currentQuestion]: {isCorrect: {$set: isCorrect}}}),
+        currentQuestion: prevState.currentQuestion + 1,
+        points: isCorrect ? prevState.points + 1 : prevState.points,
+      };
     });
+    console.log(this.state);
   }
 
   componentDidMount() {
@@ -32,12 +40,16 @@ class Quiz extends Component {
   render({ questions, currentQuestion } = this.state) {
     return questions[currentQuestion] ? (
       <div className="quiz">
-        <h2>{decodeURI(questions[currentQuestion].question)}</h2>
-        <Answers
+        <h2
+          dangerouslySetInnerHTML={{
+            __html: questions[currentQuestion].question,
+          }}
+        ></h2>
+        <AnswersList
           incorrect={questions[currentQuestion]["incorrect_answers"]}
           correct={questions[currentQuestion]["correct_answer"]}
-          changeCurrentQuestion={prevState =>
-            this.changeCurrentQuestion(prevState)
+          handleAnswer={isCorrect =>
+            this.handleAnswer(isCorrect)
           }
         />
         <p>{currentQuestion + 1}/10</p>

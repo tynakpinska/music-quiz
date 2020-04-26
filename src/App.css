@@ -19,6 +19,7 @@ h1 {
   background: #441917;
   padding: 20px 0 30px 0;
   border-bottom: 1px solid white;
+  font-size: 5vw;
 }
 
 h2 {
@@ -27,10 +28,14 @@ h2 {
   background: grey;
   border-radius: 5px;
   padding: 10px;
+  font-size: 3vw;
 }
 
 p {
   color:#441917;
+  font-weight: bold;
+  font-size: 2vw;
+  margin-top: 10px;
 }
 
 .quiz {
@@ -58,7 +63,7 @@ button {
   border: 1px solid white;
   border-radius: 5px;
   color: white;
-  font-size: 1.2rem;
+  font-size: 2vw;
 }
 
 button:hover {
@@ -72,11 +77,26 @@ button:active {
   margin: 20px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .quiz {
     width: 90%;
+    padding: 5px;
   }
   .questions {
     grid-template-columns: 1fr;
-  };
+  }
+
+  h1 {
+    font-size: 10vw;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 6vw;
+  }
+
+  button, p {
+    font-size: 5vw;
+    margin: 3px;
+  }
 }

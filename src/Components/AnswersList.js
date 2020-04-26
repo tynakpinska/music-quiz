@@ -16,7 +16,7 @@ const Answers = props => {
           key={index}
           index={index}
           correctIndex={correctIndex}
-          changeCurrentQuestion={props.changeCurrentQuestion}
+          handleAnswer={props.handleAnswer}
         />
       ))}
     </div>
