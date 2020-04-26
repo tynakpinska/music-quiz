@@ -39,7 +39,7 @@ p {
 }
 
 .quiz {
-  width: 50%;
+  width: 60%;
   margin: 5% auto;
   opacity: 0.8;
   background: rgba(255, 255, 255, 0.8);
@@ -57,7 +57,7 @@ p {
 }
 
 button {
-  background: teal;
+  background: #008080;
   margin: 10px;
   padding: 30px;
   border: 1px solid white;
@@ -75,6 +75,11 @@ button:active {
   background: rgb(2, 83, 83);
   cursor: pointer;
   margin: 20px;
+}
+
+.nextBtn {
+  background: #441917;
+  padding: 3% 10%;
 }
 
 @media (max-width: 700px) {

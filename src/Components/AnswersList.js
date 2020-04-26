@@ -1,21 +1,22 @@
 import React from "react";
 import Answer from "./Answer";
 
-const Answers = props => {
-  const incorrect = props.incorrect;
-  const answersArray = incorrect;
-  const correct = props.correct;
-  const correctIndex = Math.floor(Math.random() * 4);
-  answersArray.splice(correctIndex, 0, correct);
+const AnswersList = props => {
+  const incorrect = props.question.incorrect;
+  const correct = props.question.correct;
+  const first = incorrect.slice(0, props.question.correctIndex);
+  const second = incorrect.slice(props.question.correctIndex, 3);
+  const answersArray = [...first, correct, ...second];
 
   return (
     <div className="questions">
       {answersArray.map((a, index) => (
         <Answer
+        question={props.question}
           answer={a}
           key={index}
           index={index}
-          correctIndex={correctIndex}
+          correctIndex={props.question.correctIndex}
           handleAnswer={props.handleAnswer}
         />
       ))}
@@ -23,4 +24,4 @@ const Answers = props => {
   );
 };
 
-export default Answers;
+export default AnswersList;
