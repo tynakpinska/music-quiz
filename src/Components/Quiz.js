@@ -26,6 +26,7 @@ class Quiz extends Component {
   };
 
   handleNext = () => {
+    console.log("click")
     this.setState(prevState => {
       return {
         currentQuestion: prevState.currentQuestion++,
@@ -34,6 +35,7 @@ class Quiz extends Component {
   };
 
   handlePrevious = () => {
+    console.log("click")
     this.setState(prevState => {
       return {
         currentQuestion: prevState.currentQuestion--,
