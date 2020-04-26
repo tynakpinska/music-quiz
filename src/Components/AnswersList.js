@@ -17,7 +17,9 @@ const AnswersList = props => {
           key={index}
           index={index}
           correctIndex={props.question.correctIndex}
-          handleAnswer={props.handleAnswer}
+          checkedAnswer={props.question.checkedAnswer}
+          handleCheck={props.handleCheck}
+          checking={props.checking}
         />
       ))}
     </div>

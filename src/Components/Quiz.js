@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import update from "react-addons-update";
 import AnswersList from "./AnswersList";
 
 class Quiz extends Component {
@@ -9,20 +8,21 @@ class Quiz extends Component {
       questions: [],
       currentQuestion: 0,
       points: 0,
+      checking: false,
     };
   }
 
-  handleAnswer = isCorrect => {
-    console.log(isCorrect);
-    this.setState(prevState => {
-      return {
-        questions: update(this.state.questions, {
-          [prevState.currentQuestion]: { isCorrect: { $set: isCorrect } },
-        }),
-        points: isCorrect ? prevState.points + 1 : prevState.points,
-      };
-    });
-    console.log(this.state);
+  handleCheck = index => {
+    const questions = { ...this.state.questions };
+    questions[this.state.currentQuestion].checkedAnswer = index;
+    this.setState({ questions });
+    if (questions[this.state.currentQuestion].correctIndex === index) {
+      this.setState(prevState => {
+        return {
+          points: prevState.points++,
+        };
+      });
+    }
   };
 
   handleNext = () => {
@@ -33,8 +33,16 @@ class Quiz extends Component {
     });
   };
 
+  handlePrevious = () => {
+    this.setState(prevState => {
+      return {
+        currentQuestion: prevState.currentQuestion--,
+      };
+    });
+  };
+
   handleCheckAnswers = () => {
-    this.setState({ currentQuestion: 0 });
+    this.setState({ currentQuestion: 0, checking: true });
   };
 
   componentDidMount() {
@@ -46,13 +54,15 @@ class Quiz extends Component {
         this.setState({
           questions: [
             ...resp.results.map(q => {
-            return {
-              question: q["question"],
-              incorrect: q["incorrect_answers"],
-              correct: q["correct_answer"],
-              correctIndex: Math.floor(Math.random() * 4)
-            };
-          })],
+              return {
+                question: q["question"],
+                incorrect: q["incorrect_answers"],
+                correct: q["correct_answer"],
+                correctIndex: Math.floor(Math.random() * 4),
+                checkedAnswer: "",
+              };
+            }),
+          ],
         });
       })
       .catch(err => {
@@ -60,7 +70,7 @@ class Quiz extends Component {
       });
   }
 
-  render({ questions, currentQuestion, correctIndex } = this.state) {
+  render({ questions, currentQuestion } = this.state) {
     return currentQuestion !== 10 ? (
       questions[currentQuestion] ? (
         <div className="quiz">
@@ -71,12 +81,18 @@ class Quiz extends Component {
           ></h2>
           <AnswersList
             question={questions[currentQuestion]}
-            handleAnswer={isCorrect => this.handleAnswer(isCorrect)}
+            handleCheck={index => this.handleCheck(index)}
+            checking={this.state.checking}
           />
-          <p>{currentQuestion + 1}/10</p>
-          <button className="nextBtn" onClick={this.handleNext}>
-            Next
-          </button>
+          <div className="navButtons">
+            <button className="prevBtn" onClick={this.handlePrevious}>
+              Previous
+            </button>
+            <p>{currentQuestion + 1}/10</p>
+            <button className="nextBtn" onClick={this.handleNext}>
+              Next
+            </button>
+          </div>
         </div>
       ) : (
         <div></div>
