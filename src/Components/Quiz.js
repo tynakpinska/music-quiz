@@ -44,7 +44,7 @@ class Quiz extends Component {
     const questions = { ...this.state.questions };
     if (questions[this.state.currentQuestion].checkedAnswer === index) {
       questions[this.state.currentQuestion].checkedAnswer = undefined;
-      this.setState({ questions });
+      this.setState({ questions, blocked: true });
     } else {
       questions[this.state.currentQuestion].checkedAnswer = index;
       this.setState({ questions, blocked: false })
