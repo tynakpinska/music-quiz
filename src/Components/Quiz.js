@@ -1,53 +1,21 @@
 import React, { Component } from "react";
 import AnswersList from "./AnswersList";
 
+const initialState = {
+  questions: [],
+  currentQuestion: 0,
+  points: 0,
+  checking: false,
+  blocked: false,
+};
+
 class Quiz extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      questions: [],
-      currentQuestion: 0,
-      points: 0,
-      checking: false,
-    };
+    this.state = initialState;
   }
 
-  handleCheck = index => {
-    const questions = { ...this.state.questions };
-    questions[this.state.currentQuestion].checkedAnswer = index;
-    this.setState({ questions });
-    if (questions[this.state.currentQuestion].correctIndex === index) {
-      this.setState(prevState => {
-        return {
-          points: prevState.points++,
-        };
-      });
-    }
-  };
-
-  handleNext = () => {
-    console.log("click")
-    this.setState(prevState => {
-      return {
-        currentQuestion: prevState.currentQuestion++,
-      };
-    });
-  };
-
-  handlePrevious = () => {
-    console.log("click")
-    this.setState(prevState => {
-      return {
-        currentQuestion: prevState.currentQuestion--,
-      };
-    });
-  };
-
-  handleCheckAnswers = () => {
-    this.setState({ currentQuestion: 0, checking: true });
-  };
-
-  componentDidMount() {
+  fetchQuestions = () => {
     fetch(
       "https://opentdb.com/api.php?amount=10&category=12&difficulty=easy&type=multiple"
     )
@@ -70,9 +38,52 @@ class Quiz extends Component {
       .catch(err => {
         console.log(err, "Unable to fetch questions");
       });
+  };
+
+  handleCheck = index => {
+    const questions = { ...this.state.questions };
+    if (questions[this.state.currentQuestion].checkedAnswer === index) {
+      questions[this.state.currentQuestion].checkedAnswer = undefined;
+      this.setState({ questions });
+    } else {
+      questions[this.state.currentQuestion].checkedAnswer = index;
+      this.setState({ questions, blocked: false })
+    }
+    if (questions[this.state.currentQuestion].correctIndex === index) {
+      this.setState(prevState => {
+        return {
+          points: prevState.points++,
+        };
+      });
+    }
+  };
+
+  handleNext = (e, { questions, currentQuestion } = this.state) => {
+    if (questions[currentQuestion].checkedAnswer === "") {
+      this.setState({ blocked: true });
+    } else {
+      this.setState({ currentQuestion: currentQuestion + 1, blocked: false });
+    }
+  };
+
+  handlePrevious = (e, { currentQuestion } = this.state) => {
+    this.setState({ currentQuestion: currentQuestion - 1 });
+  };
+
+  handleCheckAnswers = () => {
+    this.setState({ currentQuestion: 0, checking: true });
+  };
+
+  handlePlayAgain = () => {
+    this.setState(initialState);
+    this.fetchQuestions();
+  };
+
+  componentDidMount() {
+    this.fetchQuestions();
   }
 
-  render({ questions, currentQuestion } = this.state) {
+  render({ questions, currentQuestion, points, checking } = this.state) {
     return currentQuestion !== 10 ? (
       questions[currentQuestion] ? (
         <div className="quiz">
@@ -84,25 +95,31 @@ class Quiz extends Component {
           <AnswersList
             question={questions[currentQuestion]}
             handleCheck={index => this.handleCheck(index)}
-            checking={this.state.checking}
+            checking={checking}
           />
           <div className="navButtons">
-            <button className="prevBtn" onClick={this.handlePrevious}>
-              Previous
-            </button>
+            {this.state.currentQuestion ? (
+              <button className="prevBtn" onClick={this.handlePrevious}>
+                Previous
+              </button>
+            ) : (
+              <div></div>
+            )}
             <p>{currentQuestion + 1}/10</p>
             <button className="nextBtn" onClick={this.handleNext}>
               Next
             </button>
           </div>
+          {this.state.blocked ? <p>Select your answer</p> : <div></div>}
         </div>
       ) : (
         <div></div>
       )
     ) : (
       <div className="quiz">
-        <p>Score: {this.state.points}/10</p>
+        <p>Score: {points}/10</p>
         <button onClick={this.handleCheckAnswers}>Check answers</button>
+        <button onClick={this.handlePlayAgain}>Play again</button>
       </div>
     );
   }

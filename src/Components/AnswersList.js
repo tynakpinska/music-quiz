@@ -1,25 +1,25 @@
 import React from "react";
 import Answer from "./Answer";
 
-const AnswersList = props => {
-  const incorrect = props.question.incorrect;
-  const correct = props.question.correct;
-  const first = incorrect.slice(0, props.question.correctIndex);
-  const second = incorrect.slice(props.question.correctIndex, 3);
+const AnswersList = ({ question, handleCheck, checking }) => {
+  const incorrect = question.incorrect;
+  const correct = question.correct;
+  const first = incorrect.slice(0, question.correctIndex);
+  const second = incorrect.slice(question.correctIndex, 3);
   const answersArray = [...first, correct, ...second];
 
   return (
     <div className="questions">
       {answersArray.map((a, index) => (
         <Answer
-        question={props.question}
+          question={question}
           answer={a}
           key={index}
           index={index}
-          correctIndex={props.question.correctIndex}
-          checkedAnswer={props.question.checkedAnswer}
-          handleCheck={props.handleCheck}
-          checking={props.checking}
+          correctIndex={question.correctIndex}
+          checkedAnswer={question.checkedAnswer}
+          handleCheck={handleCheck}
+          checking={checking}
         />
       ))}
     </div>
