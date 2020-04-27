@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/music-quiz/static/css/main.6c4ebef7.chunk.css",
-    "main.js": "/music-quiz/static/js/main.1d43fe92.chunk.js",
-    "main.js.map": "/music-quiz/static/js/main.1d43fe92.chunk.js.map",
+    "main.js": "/music-quiz/static/js/main.2e402f2b.chunk.js",
+    "main.js.map": "/music-quiz/static/js/main.2e402f2b.chunk.js.map",
     "runtime-main.js": "/music-quiz/static/js/runtime-main.07baa274.js",
     "runtime-main.js.map": "/music-quiz/static/js/runtime-main.07baa274.js.map",
     "static/js/2.9e4e4236.chunk.js": "/music-quiz/static/js/2.9e4e4236.chunk.js",
     "static/js/2.9e4e4236.chunk.js.map": "/music-quiz/static/js/2.9e4e4236.chunk.js.map",
     "index.html": "/music-quiz/index.html",
-    "precache-manifest.636c0b251333efeb6a7800a6796a262f.js": "/music-quiz/precache-manifest.636c0b251333efeb6a7800a6796a262f.js",
+    "precache-manifest.d26e10b78d51361b684a08c95abff55b.js": "/music-quiz/precache-manifest.d26e10b78d51361b684a08c95abff55b.js",
     "service-worker.js": "/music-quiz/service-worker.js",
     "static/css/main.6c4ebef7.chunk.css.map": "/music-quiz/static/css/main.6c4ebef7.chunk.css.map",
     "static/js/2.9e4e4236.chunk.js.LICENSE.txt": "/music-quiz/static/js/2.9e4e4236.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.07baa274.js",
     "static/js/2.9e4e4236.chunk.js",
     "static/css/main.6c4ebef7.chunk.css",
-    "static/js/main.1d43fe92.chunk.js"
+    "static/js/main.2e402f2b.chunk.js"
   ]
 }
