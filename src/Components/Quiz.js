@@ -61,7 +61,8 @@ class Quiz extends Component {
     }
     if (
       questions[this.state.currentQuestion].correctIndex ===
-      questions[this.state.currentQuestion].checkedAnswer
+      questions[this.state.currentQuestion].checkedAnswer &&
+      !this.state.checking
     ) {
       this.setState(prevState => {
         return {
