@@ -43,13 +43,12 @@ class Quiz extends Component {
   handleCheck = index => {
     const questions = { ...this.state.questions };
     if (questions[this.state.currentQuestion].checkedAnswer === index) {
-      questions[this.state.currentQuestion].checkedAnswer = undefined;
+      questions[this.state.currentQuestion].checkedAnswer = "";
       this.setState({ questions, blocked: true });
     } else {
       questions[this.state.currentQuestion].checkedAnswer = index;
-      this.setState({ questions, blocked: false })
+      this.setState({ questions, blocked: false });
     }
-
   };
 
   handleNext = (e, { questions, currentQuestion } = this.state) => {
@@ -58,10 +57,13 @@ class Quiz extends Component {
     } else {
       this.setState({ currentQuestion: currentQuestion + 1, blocked: false });
     }
-    if (questions[this.state.currentQuestion].correctIndex === questions[this.state.currentQuestion].checkedAnswer) {
+    if (
+      questions[this.state.currentQuestion].correctIndex ===
+      questions[this.state.currentQuestion].checkedAnswer
+    ) {
       this.setState(prevState => {
         return {
-          points: prevState.points+1,
+          points: prevState.points + 1,
         };
       });
     }
