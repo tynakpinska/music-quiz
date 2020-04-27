@@ -49,13 +49,7 @@ class Quiz extends Component {
       questions[this.state.currentQuestion].checkedAnswer = index;
       this.setState({ questions, blocked: false })
     }
-    if (questions[this.state.currentQuestion].correctIndex === index) {
-      this.setState(prevState => {
-        return {
-          points: prevState.points++,
-        };
-      });
-    }
+
   };
 
   handleNext = (e, { questions, currentQuestion } = this.state) => {
@@ -63,6 +57,13 @@ class Quiz extends Component {
       this.setState({ blocked: true });
     } else {
       this.setState({ currentQuestion: currentQuestion + 1, blocked: false });
+    }
+    if (questions[this.state.currentQuestion].correctIndex === questions[this.state.currentQuestion].checkedAnswer) {
+      this.setState(prevState => {
+        return {
+          points: prevState.points++,
+        };
+      });
     }
   };
 
