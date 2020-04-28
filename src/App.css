@@ -87,6 +87,11 @@ button:active {
   font-size: 1.1rem;
 }
 
+button:focus {
+  border: 2px solid white;
+  outline: none;
+}
+
 .navButtons {
   display: flex;
   justify-content: center;
@@ -109,6 +114,12 @@ button:active {
 .nextBtn:active,
 .prevBtn.active {
   background: rgba(68, 25, 23, 1);
+}
+
+.nextBtn:focus,
+.prevBtn.focus {
+  border: 2px solid white;
+  outline: none;
 }
 
 .score {
