@@ -117,7 +117,7 @@ button:focus {
 }
 
 .nextBtn:focus,
-.prevBtn.focus {
+.prevBtn:focus {
   border: 2px solid white;
   outline: none;
 }
