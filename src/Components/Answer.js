@@ -1,22 +1,30 @@
 import React from "react";
 
-const Answer = props => {
+const Answer = ({
+  index,
+  checking,
+  answer,
+  checkedAnswer,
+  correctIndex,
+  handleCheck,
+}) => {
+
   const handleClick = e => {
-    props.handleCheck(props.index);
+    handleCheck(index);
   };
 
   let style = {};
 
-  if (props.checking) {
-    if (props.index === props.checkedAnswer) {
-      style = { background: "#D50000", border: "3px solid #FFC551" };
+  if (checking) {
+    if (index === checkedAnswer) {
+      style = { background: "#D50000"};
     }
-    if (props.index === props.correctIndex) {
+    if (index === correctIndex) {
       style = { background: "#63DB1C" };
     }
   } else {
-    if (props.index === props.checkedAnswer) {
-      style = { background: "#004F4F", border: "3px solid #FFC551" };
+    if (index === checkedAnswer) {
+      style = { background: "#FFC551", color: "#441917" };
     }
   }
 
@@ -24,7 +32,7 @@ const Answer = props => {
     <button
       className="answer"
       onClick={handleClick}
-      dangerouslySetInnerHTML={{ __html: props.answer }}
+      dangerouslySetInnerHTML={{ __html: answer }}
       style={style}
     ></button>
   );

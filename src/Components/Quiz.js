@@ -89,7 +89,7 @@ class Quiz extends Component {
     this.fetchQuestions();
   }
 
-  render({ questions, currentQuestion, points, checking } = this.state) {
+  render({ questions, currentQuestion, points, checking, blocked } = this.state) {
     return currentQuestion !== 10 ? (
       questions[currentQuestion] ? (
         <div className="quiz">
@@ -100,30 +100,30 @@ class Quiz extends Component {
           ></h2>
           <AnswersList
             question={questions[currentQuestion]}
-            handleCheck={index => this.handleCheck(index)}
+            handleCheck={this.handleCheck}
             checking={checking}
           />
+          <p className="current">{currentQuestion + 1}/10</p>
           <div className="navButtons">
-            {this.state.currentQuestion ? (
+            {currentQuestion ? (
               <button className="prevBtn" onClick={this.handlePrevious}>
                 Previous
               </button>
             ) : (
-              <div></div>
+              null
             )}
-            <p>{currentQuestion + 1}/10</p>
             <button className="nextBtn" onClick={this.handleNext}>
               Next
             </button>
           </div>
-          {this.state.blocked ? <p>Select your answer</p> : <div></div>}
+          {blocked ? <p>Select your answer</p> : null}
         </div>
       ) : (
-        <div></div>
+        <div className="quiz"><p>Loading...</p></div>
       )
     ) : (
       <div className="quiz">
-        <p>Score: {points}/10</p>
+        <p className="score">Score: {points}/10</p>
         <button onClick={this.handleCheckAnswers}>Check answers</button>
         <button onClick={this.handlePlayAgain}>Play again</button>
       </div>

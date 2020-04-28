@@ -9,7 +9,7 @@ const AnswersList = ({ question, handleCheck, checking }) => {
   const answersArray = [...first, correct, ...second];
 
   return (
-    <div className="questions">
+    <div className="answers">
       {answersArray.map((a, index) => (
         <Answer
           question={question}
