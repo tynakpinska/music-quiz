@@ -85,6 +85,7 @@ button:active {
   background: rgb(2, 83, 83);
   cursor: pointer;
   font-size: 1.1rem;
+  outline: none;
 }
 
 button:focus {
@@ -114,6 +115,7 @@ button:focus {
 .nextBtn:active,
 .prevBtn.active {
   background: rgba(68, 25, 23, 1);
+  outline: none;
 }
 
 .nextBtn:focus,
